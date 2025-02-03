@@ -33,4 +33,4 @@ git commit -m
   : " git checkout -b arquivo "
 
  ~ Para retornar a Branch principal
-  : " git checkout main/master "
+  : " git checkout main/master " 

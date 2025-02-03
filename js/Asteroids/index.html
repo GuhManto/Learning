@@ -1,54 +1,82 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <script src="https://unpkg.com/kaplay@3001/dist/kaplay.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Minha página de teste</title>
-  </head>
-  <body>
-  </body>
-  <script>
+</head>
+
+<body>
+</body>
+<script>
     let velAngular = 0;
-    let impulsoAngular=0.4;
-    let impulsoLinear=1;
-    let velX =0;
-    let velY =0;
-    
+    let impulsoAngular = 0.4;
+    let impulsoLinear = 1;
+    let velX = 0;
+    let velY = 0;
+
     kaplay();
+    loadSprite("background", "Sprites/espaco.gif")
+    const background = add([sprite("background"), scale(3)]);
+
+    loadSprite("queijo", "Sprites/queijo.png")
+    const queijo = add([sprite("queijo"), scale(0.5), pos(1400, 120), area(), "qeijo"]);
+
     loadSprite("ship", "Sprites/ship.png")
-    const ship = add([sprite("ship"), pos(120, 120), scale(3), rotate(90), anchor("center"),     ]);
+    const ship = add([sprite("ship"), pos(120, 120), scale(2), rotate(90), anchor("center"), area()]);
+
     onKeyPress((key) => {
 
-    //    if (key == "d"){    ship.moveBy(10, 0); }
-      //  if (key == "a"){ ship.moveBy(-10 , 0); }
-        if (key == "w"){ 
-let rad = ship.angle * (Math.PI /180)
-        
-           let impulsoLinearX = Math.sin(rad);
+        if (key == "w") {
+            let rad = ship.angle * (Math.PI / 180)
 
-           let impulsoLinearY =Math.cos( rad) * -1
+            let impulsoLinearX = Math.sin(rad);
+
+            let impulsoLinearY = Math.cos(rad) * -1
 
 
             velX = velX + impulsoLinearX;
             velY = velY + impulsoLinearY
         }
-        // if (key == "s"){ ship.moveBy(0 , 10); }
-        if (key == "q"){ velAngular -=  impulsoAngular }
-        if (key == "e"){ velAngular +=  impulsoAngular }
+        if (key == "a") { velAngular -= impulsoAngular }
+        if (key == "d") { velAngular += impulsoAngular }
 
-        
+    });
 
 
-        
-       
-});
-onUpdate(() => {
-ship.rotateBy(velAngular);
-ship.moveBy( velX,  velY);
-let rad = ship.angle * (Math.PI /180)
-debug.log("angle",Math.sin( rad))
-});
+
+    onUpdate(() => {
+        ship.rotateBy(velAngular);
+        ship.moveBy(velX, velY);
+        let rad = ship.angle * (Math.PI / 180)
+        //tdebug.log("xis", ship.pos.x)
+
+        if (ship.pos.x > width()) {
+            ship.pos.x = 0
+        }
+        if (ship.pos.x < 0) {
+            ship.pos.x = width()
+        }
+        if (ship.pos.y > height()) {
+            ship.pos.y = 0
+        }
+        if (ship.pos.y < 0) {
+            ship.pos.y = height()
+        }
+
+
+    });
+
+    ship.onCollide("qeijo", () => {
+        shake();
+        debug.log("colidiu")
+
+
+    });
+
+
 </script>
+
 </html>
-  
