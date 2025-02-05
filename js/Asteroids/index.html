@@ -22,7 +22,7 @@
     const background = add([sprite("background"), scale(3)]);
 
     loadSprite("queijo", "Sprites/queijo.png")
-    const queijo = add([sprite("queijo"), scale(0.5), pos(1400, 120), area(), "qeijo"]);
+    const queijo = add([sprite("queijo"), scale(0.5), pos(1900, 120), area(), move(LEFT, 120), "qeijo"]);
 
     loadSprite("ship", "Sprites/ship.png")
     const ship = add([sprite("ship"), pos(120, 120), scale(2), rotate(90), anchor("center"), area()]);
@@ -51,7 +51,7 @@
         ship.rotateBy(velAngular);
         ship.moveBy(velX, velY);
         let rad = ship.angle * (Math.PI / 180)
-        //tdebug.log("xis", ship.pos.x)
+        //debug.log("xis", ship.pos.y)
 
         if (ship.pos.x > width()) {
             ship.pos.x = 0
@@ -71,7 +71,9 @@
 
     ship.onCollide("qeijo", () => {
         shake();
-        debug.log("colidiu")
+
+        loadSprite("gotest","Sprites/gotest.png");
+        add([sprite("gotest"), scale(4)]);
 
 
     });
