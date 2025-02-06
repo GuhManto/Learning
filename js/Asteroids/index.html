@@ -6,6 +6,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Minha página de teste</title>
+    <style>
+        body{
+            overflow: hidden;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,7 +24,7 @@
 
     kaplay();
     loadSprite("background", "Sprites/espaco.gif")
-    const background = add([sprite("background"), scale(3)]);
+    const background = add([sprite("background"), scale(2.5, 2.9)]);
 
     loadSprite("queijo", "Sprites/queijo.png")
     const queijo = add([sprite("queijo"), scale(0.5), pos(1900, 120), area(), move(LEFT, 120), "qeijo"]);
@@ -73,7 +78,7 @@
         shake();
 
         loadSprite("gotest","Sprites/gotest.png");
-        add([sprite("gotest"), scale(4)]);
+        add([sprite("gotest"), scale(4, 3.2)]);
 
 
     });
