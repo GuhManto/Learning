@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Minha página de teste</title>
     <style>
-        body{
+        body {
             overflow: hidden;
         }
     </style>
@@ -26,8 +26,8 @@
     loadSprite("background", "Sprites/espaco.gif")
     const background = add([sprite("background"), scale(2.5, 2.9)]);
 
-    loadSprite("queijo", "Sprites/queijo.png")
-    const queijo = add([sprite("queijo"), scale(0.5), pos(1900, 120), area(), move(LEFT, 120), "qeijo"]);
+    loadSprite("asteroid", "Sprites/asteroid.png")
+    const queijo = add([sprite("asteroid"), scale(0.5), pos(1900, 120), area(), move(LEFT, 120), "qeijo"]);
 
     loadSprite("ship", "Sprites/ship.png")
     const ship = add([sprite("ship"), pos(120, 120), scale(2), rotate(90), anchor("center"), area()]);
@@ -45,8 +45,10 @@
             velX = velX + impulsoLinearX;
             velY = velY + impulsoLinearY
         }
-        if (key == "a") { velAngular -= impulsoAngular }
-        if (key == "d") { velAngular += impulsoAngular }
+        if (key == "a") { velAngular -= impulsoAngular };
+        if (key == "d") { velAngular += impulsoAngular };
+        if (key == "space") { loadSprite("shoot", "Sprites/shoot.png") }
+        add([sprite("shoot")])
 
     });
 
@@ -72,16 +74,79 @@
         }
 
 
+        _();
     });
 
     ship.onCollide("qeijo", () => {
         shake();
 
-        loadSprite("gotest","Sprites/gotest.png");
+        loadSprite("gotest", "Sprites/gotest.png");
         add([sprite("gotest"), scale(4, 3.2)]);
 
 
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    loadSprite("alien", "Sprites/alien.png");
+    const alien = add([sprite("alien"), scale(0.3), pos(-300, -300), area(), body()]);
+
+    var aspd = 10;
+    var ax = width() / 2;
+    var ay = height() / 2;
+
+
+    function _() {
+
+        alien.moveTo(vec2(ax, ay), aspd)
+
+        if (Math.random() * 1000 < 10) {
+            ax = (Math.random() * width() * 1.5) - 0.25 * width();
+            ay = (Math.random() * height() * 1.5) - 0.25 * height();
+            aspd = Math.random() * 2000;
+        }
+    }
 
 
 </script>
