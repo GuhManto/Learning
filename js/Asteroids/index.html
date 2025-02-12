@@ -23,8 +23,12 @@
     let velY = 0;
 
     kaplay();
+    loadSprite("gotest", "Sprites/gotest.png");
+
     loadSprite("background", "Sprites/espaco.gif")
     const background = add([sprite("background"), scale(2.5, 2.9)]);
+
+    loadSprite("shoot", "Sprites/shoot.png")
 
     loadSprite("asteroid", "Sprites/asteroid.png")
     const queijo = add([sprite("asteroid"), scale(0.5), pos(1900, 120), area(), move(LEFT, 120), "qeijo"]);
@@ -47,8 +51,9 @@
         }
         if (key == "a") { velAngular -= impulsoAngular };
         if (key == "d") { velAngular += impulsoAngular };
-        if (key == "space") { loadSprite("shoot", "Sprites/shoot.png") }
-        add([sprite("shoot")])
+        if (key == "space") 
+        add([sprite("shoot"), pos(700, 120), anchor("center")]);
+
 
     });
 
@@ -80,7 +85,6 @@
     ship.onCollide("qeijo", () => {
         shake();
 
-        loadSprite("gotest", "Sprites/gotest.png");
         add([sprite("gotest"), scale(4, 3.2)]);
 
 
